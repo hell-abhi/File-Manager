@@ -5,7 +5,8 @@ from gi.repository import Gtk, GObject, GdkPixbuf, Gdk
 from menu_bar import create_menu_bar
 from tool_bar import create_tool_bar
 from side_bar import create_side_bar
-from list_view import create_list_view
+from list_view import create_list_view, create_icon_view
+from shared_variables import toggletoolbutton, main_view
 
 
 class EntryWindow(Gtk.Window):
@@ -32,13 +33,20 @@ class EntryWindow(Gtk.Window):
         horizontal_box.pack_start(side_bar, False, True, 0)
         horizontal_box.set_halign(Gtk.Align.START)
         
-        list_view = create_list_view()
+        global main_view
+        if toggletoolbutton.get_active():
+            main_view = create_icon_view()
+        else:
+            main_view = create_list_view()
         #list_view.set_hexpand (True)
         #list_view.set_vexpand (True)
         scrolled_window = Gtk.ScrolledWindow()
-        scrolled_window.add(list_view)
+        scrolled_window.add(main_view)
         #scrolled_window.set_min_content_width(1000)
-        scrolled_window.set_policy(hscrollbar_policy=Gtk.PolicyType.NEVER, vscrollbar_policy=Gtk.PolicyType.AUTOMATIC)
+        scrolled_window.set_policy(
+            hscrollbar_policy=Gtk.PolicyType.NEVER, 
+            vscrollbar_policy=Gtk.PolicyType.AUTOMATIC
+        )
         horizontal_box.pack_start(scrolled_window, True, True, 0)
         
 
