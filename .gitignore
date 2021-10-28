@@ -2,3 +2,8 @@ icon_browser.py
 iconView.py
 listView.py
 index.html
+__pycache__/
+*.bak
+*.log
+[Tt]humbs.tb #windows thumbnail cache
+.DS_Store #macOS metadata storage
